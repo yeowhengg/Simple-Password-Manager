@@ -36,9 +36,12 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         Intent intent = getIntent();
-        String getEmail = intent.getStringExtra("email_key");
-        String getMasterPw = intent.getStringExtra("pw_key");
+        if (intent.getExtras() != null) {
+            String getEmail = intent.getStringExtra("email_key");
+            String getMasterPw = intent.getStringExtra("pw_key");
 
-        Toast.makeText(getApplicationContext(), String.format("Email: %s, Pw: %s", getEmail, getMasterPw), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), String.format("Email: %s, Pw: %s", getEmail, getMasterPw), Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

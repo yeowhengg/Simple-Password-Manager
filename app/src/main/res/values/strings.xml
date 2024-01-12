@@ -11,5 +11,5 @@
     <string name="popup_prompt_master_password_text">Master password:</string>
     <string name="register_popup_tv">Register</string>
     <string name="register_btn">Register</string>
-
+    <string name="login_tv">Login</string>
 </resources>
