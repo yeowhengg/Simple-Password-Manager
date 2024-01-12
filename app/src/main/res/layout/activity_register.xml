@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:minHeight="500dp"
+    android:maxHeight="500dp"
+    android:id="@+id/layout"
+    tools:context=".RegisterActivity"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/image_description"
+        android:visibility="visible"
+
+
+        android:src="@mipmap/logo_foreground" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="150dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/register_popup_tv"
+
+            android:gravity="center"
+            android:textSize="25sp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvEmailAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:width="150dp"
+            android:height="50dp"
+            android:gravity="center"
+            android:text="@string/popup_prompt_email_text"
+            android:textSize="22sp" />
+
+        <EditText
+            android:id="@+id/teEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_toEndOf="@+id/tvEmailAddress"
+            android:layout_alignTop="@+id/tvEmailAddress"
+            android:layout_alignBottom="@+id/tvEmailAddress"
+            android:autofillHints="Enter email address.."
+            android:hint="@string/enter_email_address_hint"
+            android:labelFor="@+id/tvEmailAddress"
+            android:inputType="textEmailAddress"
+            tools:ignore="LabelFor">
+
+        </EditText>
+
+        <TextView
+            android:id="@+id/tvMasterPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:width="150dp"
+            android:height="50dp"
+            android:gravity="center"
+            android:text="@string/popup_prompt_master_password_text"
+
+            android:textSize="22sp" />
+
+        <EditText
+            android:id="@+id/teMasterPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_toEndOf="@+id/tvMasterPassword"
+            android:layout_alignTop="@+id/tvMasterPassword"
+            android:layout_alignBottom="@+id/tvMasterPassword"
+            android:autofillHints="Enter master password.."
+            android:hint="@string/enter_master_password_hint"
+            android:labelFor="@+id/tvMasterPassword"
+            android:inputType="textPassword"
+            tools:ignore="LabelFor">
+
+        </EditText>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/registerViewBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+
+
+        android:layout_alignParentBottom="true"
+
+        android:layout_centerInParent="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="100dp"
+        android:gravity="center"
+        android:text="@string/register_btn">
+
+
+    </Button>
+
+
+</RelativeLayout>
