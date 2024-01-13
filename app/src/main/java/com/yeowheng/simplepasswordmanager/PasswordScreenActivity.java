@@ -7,7 +7,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,32 +15,34 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 public class PasswordScreenActivity extends AppCompatActivity {
-String[] test;
+
 GridLayout applicationPasswordDetailsLayout;
 Button addPassword;
+Context context;
 
-TextView[] toAdd = new TextView[5];
     @SuppressLint("DefaultLocale")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Context context = PasswordScreenActivity.this;
+        context = PasswordScreenActivity.this;
         setContentView(R.layout.activity_password_screen);
         TextView DEFAULT_APPLICATION_STRING = new TextView(this);
         TextView DEFAULT_PASSWORD_STRING = new TextView(this);
         addPassword = (Button) findViewById(R.id.btnAddPassword);
 
-        DEFAULT_APPLICATION_STRING.setText("Application");
-        DEFAULT_PASSWORD_STRING.setText("Password");
+        DEFAULT_APPLICATION_STRING.setText(R.string.defaultapplication);
+        DEFAULT_PASSWORD_STRING.setText(R.string.defaultpassword);
 
         applicationPasswordDetailsLayout = (GridLayout) findViewById(R.id.applicationPasswordDetailsID);
         applicationPasswordDetailsLayout.addView(DEFAULT_APPLICATION_STRING);
         applicationPasswordDetailsLayout.addView(DEFAULT_PASSWORD_STRING);
 
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         addPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,6 +92,5 @@ TextView[] toAdd = new TextView[5];
                 alert.show();
             }
         });
-
     }
 }

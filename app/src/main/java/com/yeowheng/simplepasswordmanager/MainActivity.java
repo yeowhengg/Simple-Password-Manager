@@ -13,11 +13,14 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
+private DBManager dbManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dbManager = new DBManager(this);
+        dbManager.open();
+
         Button registerBtn = findViewById(R.id.btnRegister);
         Button loginBtn = findViewById(R.id.btnLogin);
 
@@ -42,13 +45,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        Intent intent = getIntent();
-        if (intent.getExtras() != null) {
-            String getEmail = intent.getStringExtra("email_key");
-            String getMasterPw = intent.getStringExtra("pw_key");
 
-            Toast.makeText(getApplicationContext(), String.format("Email: %s, Pw: %s", getEmail, getMasterPw), Toast.LENGTH_SHORT).show();
-        }
+
 
     }
 }
