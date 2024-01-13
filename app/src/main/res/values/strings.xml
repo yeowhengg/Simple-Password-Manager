@@ -15,4 +15,9 @@
     <string name="defaultapplication">Application</string>
     <string name="defaultpassword">Password</string>
     <string name="forget_password_btn">Forget Password</string>
+    <string name="ForgetPassword_tv">Forget Password</string>
+    <string name="email_tv">Email address:</string>
+    <string name="enter_email_hint">Enter email..</string>
+    <string name="verification_code_tv">Verification code:</string>
+    <string name="enter_verification_code_hint">Enter verification code</string>
 </resources>

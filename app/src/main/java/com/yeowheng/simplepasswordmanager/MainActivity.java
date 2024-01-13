@@ -9,6 +9,10 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 private DBManager dbManager;
+Button registerBtn;
+Button loginBtn;
+Button forgetPasswordBtn;
+Boolean foundAccount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,15 +20,21 @@ private DBManager dbManager;
         dbManager = new DBManager(this);
         dbManager.open();
 
-        Button registerBtn = findViewById(R.id.btnRegister);
-        Button loginBtn = findViewById(R.id.btnLogin);
+        registerBtn = findViewById(R.id.btnRegister);
+        loginBtn = findViewById(R.id.btnLogin);
+        foundAccount = dbManager.CheckRegistered();
 
-        if(dbManager.CheckRegistered()){
-            Button forgetPasswordBtn = findViewById(R.id.btnForgetPassword);
+        if(foundAccount){
+            forgetPasswordBtn = findViewById(R.id.btnForgetPassword);
             registerBtn.setVisibility(View.GONE);
             forgetPasswordBtn.setVisibility(View.VISIBLE);
-
         }
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,11 +51,17 @@ private DBManager dbManager;
             }
         });
 
-    }
+        if (foundAccount){
+            forgetPasswordBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(MainActivity.this, ForgetPasswordActivity.class));
+                }
+            });
+        }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+
+
 
 
 
