@@ -13,6 +13,9 @@
         android:theme="@style/Theme.SimplePasswordManager"
         tools:targetApi="31">
         <activity
+            android:name=".PasswordScreenActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity

@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Simple Password Manager"
 include(":app")
+include(":Helper")
