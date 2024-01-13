@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,11 +16,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class PasswordScreenActivity extends AppCompatActivity {
 
 GridLayout applicationPasswordDetailsLayout;
 Button addPassword;
 Context context;
+
+private DBManager dbManager;
+
 
     @SuppressLint("DefaultLocale")
     @Override
@@ -38,13 +47,38 @@ Context context;
         applicationPasswordDetailsLayout.addView(DEFAULT_APPLICATION_STRING);
         applicationPasswordDetailsLayout.addView(DEFAULT_PASSWORD_STRING);
 
+        dbManager = new DBManager(this);
+        dbManager.open();
+
+
+
+        Map<String, String> map = new HashMap<String, String>();
+        map = dbManager.RetrieveData();
+
+        if (map != null) {
+            Log.i("hashmap", map.toString());
+
+            for (Map.Entry<String, String> entry : map.entrySet()) {
+                String key = entry.getKey();
+                String val = entry.getValue();
+
+                TextView applicationTV = new TextView(this);
+                TextView passwordTV = new TextView(this);
+                applicationTV.setText(key);
+                passwordTV.setText(val);
+                applicationPasswordDetailsLayout.addView(applicationTV);
+                applicationPasswordDetailsLayout.addView(passwordTV);
+            }
+        }
+
+
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         addPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(context);
                 LinearLayout verticalLayout = new LinearLayout(context);
@@ -65,18 +99,24 @@ Context context;
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String applicationName = inputApplication.getText().toString();
                         String applicationPassword = inputPassword.getText().toString();
+
                         if (applicationName.equals("") && applicationPassword.equals("")){
                             Toast.makeText(context, "Please fill in both blanks", Toast.LENGTH_SHORT).show();
+                            return;
                         }
-                        else{
-                            TextView applicationNameTV = new TextView(context);
-                            TextView applicationPasswordTV = new TextView(context);
-                            applicationPasswordTV.setText(applicationPassword);
-                            applicationNameTV.setText(applicationName);
-                            applicationPasswordDetailsLayout.addView(applicationNameTV);
-                            applicationPasswordDetailsLayout.addView(applicationPasswordTV);
 
+                        TextView applicationNameTV = new TextView(context);
+                        TextView applicationPasswordTV = new TextView(context);
+                        applicationPasswordTV.setText(applicationPassword);
+                        applicationNameTV.setText(applicationName);
+
+                        long result = dbManager.InsertData(applicationName, applicationPassword);
+                        if (result == -1){
+                            Toast.makeText(context, "something went wrong..", Toast.LENGTH_SHORT).show();
                         }
+
+                        applicationPasswordDetailsLayout.addView(applicationNameTV);
+                        applicationPasswordDetailsLayout.addView(applicationPasswordTV);
 
                     }
                 });
@@ -84,13 +124,17 @@ Context context;
                 alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         // Canceled.
-                        Toast.makeText(context, "test", Toast.LENGTH_SHORT).show();
-
                     }
                 });
 
                 alert.show();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dbManager.close();
     }
 }

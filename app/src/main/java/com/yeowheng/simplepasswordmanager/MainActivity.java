@@ -1,16 +1,11 @@
 package com.yeowheng.simplepasswordmanager;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
+
 
 public class MainActivity extends AppCompatActivity {
 private DBManager dbManager;
@@ -23,6 +18,13 @@ private DBManager dbManager;
 
         Button registerBtn = findViewById(R.id.btnRegister);
         Button loginBtn = findViewById(R.id.btnLogin);
+
+        if(dbManager.CheckRegistered()){
+            Button forgetPasswordBtn = findViewById(R.id.btnForgetPassword);
+            registerBtn.setVisibility(View.GONE);
+            forgetPasswordBtn.setVisibility(View.VISIBLE);
+
+        }
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override

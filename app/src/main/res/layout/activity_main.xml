@@ -49,4 +49,20 @@
         >
 
     </Button>
+
+    <Button
+        android:id="@+id/btnForgetPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/register"
+
+        android:textAppearance="@style/ShapeAppearance.Material3.Corner.ExtraLarge"
+        android:textSize="30sp"
+
+        app:layout_constraintTop_toBottomOf="@id/btnLogin"
+        android:visibility="gone"
+        >
+
+    </Button>
 </androidx.constraintlayout.widget.ConstraintLayout>
